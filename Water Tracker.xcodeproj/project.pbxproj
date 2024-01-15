@@ -11,6 +11,8 @@
 		8C55CD262B55569F00677AF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD252B55569F00677AF6 /* ContentView.swift */; };
 		8C55CD282B5556A100677AF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C55CD272B5556A100677AF6 /* Assets.xcassets */; };
 		8C55CD2B2B5556A100677AF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C55CD2A2B5556A100677AF6 /* Preview Assets.xcassets */; };
+		8C55CD382B55593F00677AF6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD372B55593F00677AF6 /* MainView.swift */; };
+		8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD392B5559EF00677AF6 /* Shapes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		8C55CD252B55569F00677AF6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8C55CD272B5556A100677AF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C55CD2A2B5556A100677AF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8C55CD372B55593F00677AF6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8C55CD392B5559EF00677AF6 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +55,12 @@
 		8C55CD222B55569F00677AF6 /* Water Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				8C55CD232B55569F00677AF6 /* Water_TrackerApp.swift */,
-				8C55CD252B55569F00677AF6 /* ContentView.swift */,
-				8C55CD272B5556A100677AF6 /* Assets.xcassets */,
+				8C55CD352B55579C00677AF6 /* App */,
+				8C55CD342B55579000677AF6 /* Views */,
+				8C55CD332B55578300677AF6 /* Components */,
+				8C55CD322B55577100677AF6 /* Model */,
+				8C55CD312B55576800677AF6 /* Core */,
+				8C55CD362B55591100677AF6 /* Resources */,
 				8C55CD292B5556A100677AF6 /* Preview Content */,
 			);
 			path = "Water Tracker";
@@ -65,6 +72,53 @@
 				8C55CD2A2B5556A100677AF6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8C55CD312B55576800677AF6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8C55CD252B55569F00677AF6 /* ContentView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8C55CD322B55577100677AF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8C55CD332B55578300677AF6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8C55CD342B55579000677AF6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C55CD372B55593F00677AF6 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C55CD352B55579C00677AF6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8C55CD232B55569F00677AF6 /* Water_TrackerApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8C55CD362B55591100677AF6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8C55CD272B5556A100677AF6 /* Assets.xcassets */,
+				8C55CD392B5559EF00677AF6 /* Shapes.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +192,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C55CD262B55569F00677AF6 /* ContentView.swift in Sources */,
+				8C55CD382B55593F00677AF6 /* MainView.swift in Sources */,
 				8C55CD242B55569F00677AF6 /* Water_TrackerApp.swift in Sources */,
+				8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
