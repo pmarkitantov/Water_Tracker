@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct MainView: View {
+    var date = Date()
+
+    var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateFormat = "dd MMMM"
+        return df
+    }
+
     @AppStorage("SelectedVolume") private var selectedVolume = 500
     @AppStorage("TotalWater") private var totalWater = 0
+    @AppStorage("currentDate") private var currentDate = ""
+    
 
     var body: some View {
         ZStack {
@@ -37,7 +47,7 @@ struct MainView: View {
                     }
                 }
                 .padding(.horizontal, 25)
-                if totalWater != 0 {
+                if totalWater > 0 {
                     HStack {
                         Text(String(totalWater) + "ml")
                             .foregroundStyle(.white)
@@ -47,6 +57,7 @@ struct MainView: View {
                     }
                     .padding(.top, 50)
                 }
+
                 Spacer()
                 HStack {
                     if selectedVolume > 0 {
@@ -83,6 +94,7 @@ struct MainView: View {
 
                 Button {
                     totalWater += selectedVolume
+
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 100))
@@ -91,7 +103,15 @@ struct MainView: View {
                 .padding(25)
             }
         }
+        .onAppear {
+            let dateAndMonthString = dateFormatter.string(from: self.date)
+            if currentDate == "" || currentDate != dateAndMonthString {
+                currentDate = dateAndMonthString
+                totalWater = 0
+            }
+        }
     }
+        
 }
 
 #Preview {
