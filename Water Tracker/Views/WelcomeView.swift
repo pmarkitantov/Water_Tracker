@@ -10,14 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     var body: some View {
         ZStack {
-            Group {
-                Color("mainBlue")
-                TrapezoidShape()
-                    .fill(Color("secondaryBlue"))
-            }
-            .ignoresSafeArea()
-            
-            
+            BackgroundView()
         }
     }
 }

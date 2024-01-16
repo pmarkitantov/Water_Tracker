@@ -19,12 +19,7 @@ struct MainView: View {
 
     var body: some View {
         ZStack {
-            Group {
-                Color("mainBlue")
-                TrapezoidShape()
-                    .fill(Color("secondaryBlue"))
-            }
-            .ignoresSafeArea()
+            BackgroundView()
             
             VStack {
                 HStack {
@@ -56,33 +51,7 @@ struct MainView: View {
                     }
                     .padding(.top, 50)
                     Spacer()
-                    ZStack {
-                        Circle()
-                            .stroke(Color(.systemGray), lineWidth: 20)
-                            .frame(width: 250, height: 250)
-                        Circle()
-                            .trim(from: 0, to: 0.85)
-                            .stroke(
-                                AngularGradient(
-                                    gradient: Gradient(colors: [Color.white, Color.green]),
-                                    center: .center,
-                                    startAngle: .degrees(0),
-                                    endAngle: .degrees(360)
-                                ), lineWidth: 20
-                            )
-                            .frame(width: 250, height: 250)
-                            .overlay {
-                                VStack {
-                                    Text(String(format: "%.0f%%", percentageCompleted))
-                                        .font(.system(size: 40, weight: .bold, design: .rounded))
-                                    
-                                    Text("Of Day Goal Completed")
-                                        .fontWeight(.bold)
-                                        .fontDesign(.rounded)
-                                }
-                                .foregroundStyle(.white)
-                            }
-                    }
+                    CircularProgressBar(totalWater: totalWater, waterIntakeGoal: waterIntakeGoal, percentageCompleted: percentageCompleted)
                 }
                 
                 Spacer()
@@ -157,3 +126,5 @@ struct MainView: View {
 #Preview {
     MainView()
 }
+
+

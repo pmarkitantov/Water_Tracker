@@ -13,12 +13,7 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            Group {
-                Color("mainBlue").ignoresSafeArea()
-                TrapezoidShape()
-                    .fill(Color("secondaryBlue"))
-                    .ignoresSafeArea()
-            }
+            BackgroundView()
 
             VStack(spacing: 20) {
                 HStack {
