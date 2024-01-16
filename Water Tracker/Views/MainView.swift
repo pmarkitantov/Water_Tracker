@@ -8,19 +8,14 @@
 import SwiftUI
 
 struct MainView: View {
-    var date = Date()
-
-    var dateFormatter: DateFormatter {
-        let df = DateFormatter()
-        df.dateFormat = "dd MMMM"
-        return df
+    init() {
+        resetTotalCountIfNewDay()
     }
-
+    
     @AppStorage("SelectedVolume") private var selectedVolume = 500
     @AppStorage("TotalWater") private var totalWater = 0
-    @AppStorage("currentDate") private var currentDate = ""
+    @AppStorage("lastLaunchDate") private var lastDateString = ""
     
-
     var body: some View {
         ZStack {
             Group {
@@ -29,7 +24,7 @@ struct MainView: View {
                     .fill(Color("secondaryBlue"))
             }
             .ignoresSafeArea()
-
+            
             VStack {
                 HStack {
                     Button {} label: {
@@ -47,6 +42,7 @@ struct MainView: View {
                     }
                 }
                 .padding(.horizontal, 25)
+    
                 if totalWater > 0 {
                     HStack {
                         Text(String(totalWater) + "ml")
@@ -57,7 +53,7 @@ struct MainView: View {
                     }
                     .padding(.top, 50)
                 }
-
+                
                 Spacer()
                 HStack {
                     if selectedVolume > 0 {
@@ -79,10 +75,10 @@ struct MainView: View {
                         .fontWeight(.bold)
                         .fontDesign(.rounded)
                         .font(.largeTitle)
-
+                    
                     Button {
                         selectedVolume += 100
-
+                        
                     } label: {
                         Image(systemName: "plus.circle")
                             .foregroundStyle(.white)
@@ -91,10 +87,10 @@ struct MainView: View {
                             .font(.title)
                     }
                 }
-
+                
                 Button {
                     totalWater += selectedVolume
-
+                    
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 100))
@@ -103,15 +99,18 @@ struct MainView: View {
                 .padding(25)
             }
         }
-        .onAppear {
-            let dateAndMonthString = dateFormatter.string(from: self.date)
-            if currentDate == "" || currentDate != dateAndMonthString {
-                currentDate = dateAndMonthString
-                totalWater = 0
-            }
+    }
+    
+    private func resetTotalCountIfNewDay() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let currentDate = formatter.string(from: Date())
+        
+        if currentDate != lastDateString {
+            totalWater = 0
+            lastDateString = currentDate
         }
     }
-        
 }
 
 #Preview {

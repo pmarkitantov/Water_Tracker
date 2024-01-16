@@ -14,6 +14,7 @@
 		8C55CD382B55593F00677AF6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD372B55593F00677AF6 /* MainView.swift */; };
 		8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD392B5559EF00677AF6 /* Shapes.swift */; };
 		8C55CD3C2B55868300677AF6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD3B2B55868300677AF6 /* WelcomeView.swift */; };
+		8C71217B2B568C8F00E06D7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C71217A2B568C8F00E06D7A /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		8C55CD372B55593F00677AF6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8C55CD392B5559EF00677AF6 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		8C55CD3B2B55868300677AF6 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		8C71217A2B568C8F00E06D7A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		8C55CD322B55577100677AF6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8C71217A2B568C8F00E06D7A /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			files = (
 				8C55CD3C2B55868300677AF6 /* WelcomeView.swift in Sources */,
 				8C55CD262B55569F00677AF6 /* ContentView.swift in Sources */,
+				8C71217B2B568C8F00E06D7A /* User.swift in Sources */,
 				8C55CD382B55593F00677AF6 /* MainView.swift in Sources */,
 				8C55CD242B55569F00677AF6 /* Water_TrackerApp.swift in Sources */,
 				8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */,
