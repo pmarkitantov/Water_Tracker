@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
-    init() {
-        resetTotalCountIfNewDay()
-    }
-    
     @AppStorage("SelectedVolume") private var selectedVolume = 500
     @AppStorage("TotalWater") private var totalWater = 0
     @AppStorage("lastLaunchDate") private var lastDateString = ""
-    
+    @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000
+    @State private var showSettings: Bool = false
+    var percentageCompleted: Double {
+        (Double(totalWater) / waterIntakeGoal) * 100
+    }
+
     var body: some View {
         ZStack {
             Group {
@@ -27,8 +28,10 @@ struct MainView: View {
             
             VStack {
                 HStack {
-                    Button {} label: {
-                        Image(systemName: "person.circle")
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gear")
                             .foregroundStyle(.white)
                             .font(.title)
                     }
@@ -52,6 +55,34 @@ struct MainView: View {
                             .font(.largeTitle)
                     }
                     .padding(.top, 50)
+                    Spacer()
+                    ZStack {
+                        Circle()
+                            .stroke(Color(.systemGray), lineWidth: 20)
+                            .frame(width: 250, height: 250)
+                        Circle()
+                            .trim(from: 0, to: 0.85)
+                            .stroke(
+                                AngularGradient(
+                                    gradient: Gradient(colors: [Color.white, Color.green]),
+                                    center: .center,
+                                    startAngle: .degrees(0),
+                                    endAngle: .degrees(360)
+                                ), lineWidth: 20
+                            )
+                            .frame(width: 250, height: 250)
+                            .overlay {
+                                VStack {
+                                    Text(String(format: "%.0f%%", percentageCompleted))
+                                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                                    
+                                    Text("Of Day Goal Completed")
+                                        .fontWeight(.bold)
+                                        .fontDesign(.rounded)
+                                }
+                                .foregroundStyle(.white)
+                            }
+                    }
                 }
                 
                 Spacer()
@@ -70,6 +101,7 @@ struct MainView: View {
                                 .font(.title)
                         }
                     }
+                    
                     Text(String(selectedVolume) + "ml")
                         .foregroundStyle(.white)
                         .fontWeight(.bold)
@@ -90,6 +122,7 @@ struct MainView: View {
                 
                 Button {
                     totalWater += selectedVolume
+//                    calculatePercentageCompleted()
                     
                 } label: {
                     Image(systemName: "plus.circle.fill")
@@ -97,7 +130,15 @@ struct MainView: View {
                         .foregroundColor(.white)
                 }
                 .padding(25)
+                Text("Click to add the amount of water")
+                    .foregroundStyle(.white)
             }
+        }
+        .onAppear {
+            resetTotalCountIfNewDay()
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
         }
     }
     
