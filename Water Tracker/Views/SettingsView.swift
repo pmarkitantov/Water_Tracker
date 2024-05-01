@@ -22,6 +22,11 @@ struct SettingsView: View {
                         dismiss()
                     } label: {
                         Text("Save")
+                            .padding(10)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.white, lineWidth: 2)
+                            }
                     }
                 }
                 HStack {
@@ -35,7 +40,7 @@ struct SettingsView: View {
                 HStack {
                     Text("\(Int(waterIntakeGoal)) ml")
 
-                    Slider(value: $waterIntakeGoal, in: 500 ... 4000, step: 100)
+                    Slider(value: $waterIntakeGoal, in: 500 ... 5000, step: 50)
                         .accentColor(.white)
                 }
 

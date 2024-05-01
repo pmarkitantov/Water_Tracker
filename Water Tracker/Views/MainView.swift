@@ -12,15 +12,20 @@ struct MainView: View {
     @AppStorage("TotalWater") private var totalWater = 0
     @AppStorage("lastLaunchDate") private var lastDateString = ""
     @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000
+    @Environment(\.scenePhase) private var scenePhase
     @State private var showSettings: Bool = false
     var percentageCompleted: Double {
         (Double(totalWater) / waterIntakeGoal) * 100
     }
-
+    
+    init() {
+        resetTotalCountIfNewDay()
+    }
+    
     var body: some View {
         ZStack {
             BackgroundView()
-            
+                
             VStack {
                 HStack {
                     Button {
@@ -43,32 +48,34 @@ struct MainView: View {
     
                 if totalWater > 0 {
                     HStack {
-                        Text(String(totalWater) + "ml")
+                        Text("\(totalWater)/\(Int(waterIntakeGoal))" + "ml")
                             .foregroundStyle(.white)
                             .fontWeight(.bold)
                             .fontDesign(.rounded)
                             .font(.largeTitle)
+                            .padding(.top, 25)
                     }
-                    .padding(.top, 50)
+                    
                     Spacer()
                     CircularProgressBar(totalWater: totalWater, waterIntakeGoal: waterIntakeGoal, percentageCompleted: percentageCompleted)
                 }
                 
                 Spacer()
+                Text("Select your hydration volume")
+                    .foregroundStyle(.white)
+                    .padding(5)
                 HStack {
-                    if selectedVolume > 0 {
-                        Button {
-                            selectedVolume -= 100
-                            if selectedVolume < 0 {
-                                selectedVolume = 0
-                            }
-                        } label: {
-                            Image(systemName: "minus.circle")
-                                .foregroundStyle(.white)
-                                .fontWeight(.bold)
-                                .fontDesign(.rounded)
-                                .font(.title)
+                    Button {
+                        selectedVolume -= 50
+                        if selectedVolume < 0 {
+                            selectedVolume = 0
                         }
+                    } label: {
+                        Image(systemName: "minus.circle")
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                            .font(.title)
                     }
                     
                     Text(String(selectedVolume) + "ml")
@@ -78,7 +85,7 @@ struct MainView: View {
                         .font(.largeTitle)
                     
                     Button {
-                        selectedVolume += 100
+                        selectedVolume += 50
                         
                     } label: {
                         Image(systemName: "plus.circle")
@@ -91,21 +98,25 @@ struct MainView: View {
                 
                 Button {
                     totalWater += selectedVolume
-//                    calculatePercentageCompleted()
                     
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 100))
                         .foregroundColor(.white)
                 }
-                .padding(25)
+                .padding(15)
                 Text("Click to add the amount of water")
                     .foregroundStyle(.white)
             }
+            
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    resetTotalCountIfNewDay()
+                    print("onChange trigered")
+                }
+            }
         }
-        .onAppear {
-            resetTotalCountIfNewDay()
-        }
+        
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
@@ -126,5 +137,3 @@ struct MainView: View {
 #Preview {
     MainView()
 }
-
-

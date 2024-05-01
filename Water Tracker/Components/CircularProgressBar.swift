@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CircularProgressBar: View {
-    var totalWater = 0
-    var waterIntakeGoal = 0.0
+    var totalWater = 500
+    var waterIntakeGoal = 2000.0
     var percentageCompleted = 0.0
     var body: some View {
         ZStack {
@@ -28,6 +28,7 @@ struct CircularProgressBar: View {
                     lineWidth: 20
                 )
                 .frame(width: 250, height: 250)
+                .rotationEffect(.degrees(90))
                 .overlay {
                     VStack {
                         Text(String(format: "%.0f%%", percentageCompleted))
