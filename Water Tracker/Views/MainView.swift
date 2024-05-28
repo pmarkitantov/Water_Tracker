@@ -52,7 +52,7 @@ struct MainView: View {
     
      func resetTotalCountIfNewDay() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        formatter.dateFormat = "yyyy-MM-dd"
         let currentDate = formatter.string(from: Date())
         
         if lastDateString == "" {

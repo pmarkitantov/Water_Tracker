@@ -24,7 +24,7 @@ struct SettingsView: View {
                 if !vm.waterIntakeHistory.isEmpty {
                     HStack {
                         Text("History")
-                            .font(.title)
+                            .font(.headline)
                             .padding(.horizontal)
                         Spacer()
                     }
@@ -62,6 +62,8 @@ extension SettingsView {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.white, lineWidth: 2)
             }
+            .background(Color.accentColor)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
                 
                 
         }
@@ -80,7 +82,7 @@ extension SettingsView {
                     .accentColor(.white)
             }
         }
-        .padding(.horizontal)
+        .padding()
         
     }
     
