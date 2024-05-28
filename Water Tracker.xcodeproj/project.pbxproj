@@ -12,7 +12,6 @@
 		8C55CD2B2B5556A100677AF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C55CD2A2B5556A100677AF6 /* Preview Assets.xcassets */; };
 		8C55CD382B55593F00677AF6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD372B55593F00677AF6 /* MainView.swift */; };
 		8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD392B5559EF00677AF6 /* Shapes.swift */; };
-		8C71217B2B568C8F00E06D7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C71217A2B568C8F00E06D7A /* User.swift */; };
 		8C7121832B56D71600E06D7A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7121822B56D71600E06D7A /* SettingsView.swift */; };
 		8CF86A082B57016C0074C3EC /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF86A072B57016C0074C3EC /* CircularProgressBar.swift */; };
 		8CF86A0A2B5705830074C3EC /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF86A092B5705830074C3EC /* BackgroundView.swift */; };
@@ -25,7 +24,6 @@
 		8C55CD2A2B5556A100677AF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8C55CD372B55593F00677AF6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8C55CD392B5559EF00677AF6 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
-		8C71217A2B568C8F00E06D7A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8C7121822B56D71600E06D7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8CF86A072B57016C0074C3EC /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		8CF86A092B5705830074C3EC /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 		8C55CD322B55577100677AF6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8C71217A2B568C8F00E06D7A /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,7 +192,6 @@
 				8CF86A0A2B5705830074C3EC /* BackgroundView.swift in Sources */,
 				8C7121832B56D71600E06D7A /* SettingsView.swift in Sources */,
 				8CF86A082B57016C0074C3EC /* CircularProgressBar.swift in Sources */,
-				8C71217B2B568C8F00E06D7A /* User.swift in Sources */,
 				8C55CD382B55593F00677AF6 /* MainView.swift in Sources */,
 				8C55CD242B55569F00677AF6 /* Water_TrackerApp.swift in Sources */,
 				8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */,

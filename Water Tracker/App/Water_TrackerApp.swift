@@ -10,8 +10,6 @@ import SwiftUI
 @main
 struct Water_TrackerApp: App {
     
-    var user = User()
-    
     var body: some Scene {
         WindowGroup {
             MainView()
