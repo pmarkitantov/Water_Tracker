@@ -14,7 +14,7 @@
 		8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C55CD392B5559EF00677AF6 /* Shapes.swift */; };
 		8C7121832B56D71600E06D7A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7121822B56D71600E06D7A /* SettingsView.swift */; };
 		8C82A2C52C05658100CA08BC /* WaterIntakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C82A2C42C05658000CA08BC /* WaterIntakeData.swift */; };
-		8C82A2C82C0565B100CA08BC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C82A2C72C0565B100CA08BC /* DataManager.swift */; };
+		8C82A2C82C0565B100CA08BC /* WaterHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C82A2C72C0565B100CA08BC /* WaterHistoryViewModel.swift */; };
 		8CF86A082B57016C0074C3EC /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF86A072B57016C0074C3EC /* CircularProgressBar.swift */; };
 		8CF86A0A2B5705830074C3EC /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF86A092B5705830074C3EC /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
@@ -28,7 +28,7 @@
 		8C55CD392B5559EF00677AF6 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		8C7121822B56D71600E06D7A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8C82A2C42C05658000CA08BC /* WaterIntakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntakeData.swift; sourceTree = "<group>"; };
-		8C82A2C72C0565B100CA08BC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = "Water Tracker/Services/DataManager.swift"; sourceTree = SOURCE_ROOT; };
+		8C82A2C72C0565B100CA08BC /* WaterHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WaterHistoryViewModel.swift; path = "Water Tracker/ViewModel/WaterHistoryViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		8CF86A072B57016C0074C3EC /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		8CF86A092B5705830074C3EC /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1906002C0588040024EF14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8C82A2C72C0565B100CA08BC /* WaterHistoryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8C55CD172B55569F00677AF6 = {
 			isa = PBXGroup;
 			children = (
@@ -63,7 +71,7 @@
 		8C55CD222B55569F00677AF6 /* Water Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				8C82A2C62C05659C00CA08BC /* Services */,
+				8C1906002C0588040024EF14 /* ViewModel */,
 				8C55CD352B55579C00677AF6 /* App */,
 				8C55CD342B55579000677AF6 /* Views */,
 				8C55CD332B55578300677AF6 /* Components */,
@@ -123,14 +131,6 @@
 				8C55CD392B5559EF00677AF6 /* Shapes.swift */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		8C82A2C62C05659C00CA08BC /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				8C82A2C72C0565B100CA08BC /* DataManager.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +210,7 @@
 				8C82A2C52C05658100CA08BC /* WaterIntakeData.swift in Sources */,
 				8C55CD242B55569F00677AF6 /* Water_TrackerApp.swift in Sources */,
 				8C55CD3A2B5559EF00677AF6 /* Shapes.swift in Sources */,
-				8C82A2C82C0565B100CA08BC /* DataManager.swift in Sources */,
+				8C82A2C82C0565B100CA08BC /* WaterHistoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

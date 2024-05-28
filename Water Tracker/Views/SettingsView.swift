@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var vm: WaterHistoryViewModel
     @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000
 
     var body: some View {
@@ -21,7 +21,7 @@ struct SettingsView: View {
                 navigationBar
                 titleText
                 intakeSelectionBar
-                if !dataManager.waterIntakeHistory.isEmpty {
+                if !vm.waterIntakeHistory.isEmpty {
                     HStack {
                         Text("History")
                             .font(.title)
@@ -46,7 +46,7 @@ struct SettingsView: View {
 extension SettingsView {
     
     var intakeHistory: some View {
-        List(dataManager.waterIntakeHistory) { intakeData in
+        List(vm.waterIntakeHistory) { intakeData in
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading) {
                     Text("Date: \(intakeData.date)")
@@ -116,5 +116,5 @@ extension SettingsView {
 
 #Preview {
     SettingsView()
-        .environmentObject(DataManager())
+        .environmentObject(WaterHistoryViewModel())
 }

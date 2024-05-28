@@ -8,25 +8,19 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var vm: WaterHistoryViewModel
     @AppStorage("SelectedVolume") private var selectedVolume = 500
     @AppStorage("TotalWater") private var totalWater = 0
     @AppStorage("lastLaunchDate") private var lastDateString = ""
     @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000
     @AppStorage("waterIntakeHistory") private var waterIntakeHistory: Data = Data()
     @Environment(\.scenePhase) private var scenePhase
-//     var dataManager: DataManager = DataManager()
-    
-    
+
     @State private var showSettings: Bool = false
     var percentageCompleted: Double {
         (Double(totalWater) / waterIntakeGoal) * 100
     }
-    
-//    init() {
-//        resetTotalCountIfNewDay()
-//    }
-    
+
     var body: some View {
         ZStack {
             BackgroundView()
@@ -34,45 +28,25 @@ struct MainView: View {
             VStack(spacing: 20) {
                 
                 headerView
-                
-    
                 if totalWater > 0 {
-                    
                     waterIntakeDashboard
-                       
+                        .padding()
                 }
-                
-                Spacer()
-                Text("Select your hydration volume")
-                    .foregroundStyle(.white)
-                    .padding(5)
-                
                 waterVolumeStepper
+                addWaterButton
                                 
-                Button {
-                    totalWater += selectedVolume
-                    
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 100))
-                        .foregroundColor(.white)
-                }
-                .padding(15)
-                Text("Click to add the amount of water")
-                    .foregroundStyle(.white)
+               
             }
             
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .active {
+            .onChange(of: scenePhase) {
                     resetTotalCountIfNewDay()
                     print("onChange trigered")
-                }
             }
+            
         }
-        
         .sheet(isPresented: $showSettings) {
             SettingsView()
-                .environmentObject(self.dataManager)
+                .environmentObject(self.vm)
         }
     }
     
@@ -87,8 +61,8 @@ struct MainView: View {
         }
         
         if currentDate != lastDateString {
-            dataManager.addWaterIntake(WaterIntakeData(date: lastDateString, amount: totalWater))
-            dataManager.saveWaterIntakeHistory()
+            vm.addWaterIntake(WaterIntakeData(date: lastDateString, amount: totalWater))
+            vm.saveWaterIntakeHistory()
             totalWater = 0
             
             lastDateString = currentDate
@@ -133,42 +107,63 @@ extension MainView {
     }
     
     var waterVolumeStepper: some View {
-        HStack {
-            Button {
-                selectedVolume -= 50
-                if selectedVolume < 0 {
-                    selectedVolume = 0
-                }
-            } label: {
-                Image(systemName: "minus.circle")
-                    .foregroundStyle(.white)
-                    .fontWeight(.bold)
-                    .fontDesign(.rounded)
-                    .font(.title)
-            }
-            
-            Text(String(selectedVolume) + "ml")
+        Group {
+            Text("Select your hydration volume")
                 .foregroundStyle(.white)
-                .fontWeight(.bold)
-                .fontDesign(.rounded)
-                .font(.largeTitle)
-            
-            Button {
-                selectedVolume += 50
+                .padding(.top, 10)
+            HStack {
+                Button {
+                    selectedVolume -= 50
+                    if selectedVolume < 0 {
+                        selectedVolume = 0
+                    }
+                } label: {
+                    Image(systemName: "minus.circle")
+                        .foregroundStyle(.white)
+                        .fontWeight(.bold)
+                        .fontDesign(.rounded)
+                        .font(.title)
+                }
                 
-            } label: {
-                Image(systemName: "plus.circle")
+                Text(String(selectedVolume) + "ml")
                     .foregroundStyle(.white)
                     .fontWeight(.bold)
                     .fontDesign(.rounded)
-                    .font(.title)
+                    .font(.largeTitle)
+                
+                Button {
+                    selectedVolume += 50
+                    
+                } label: {
+                    Image(systemName: "plus.circle")
+                        .foregroundStyle(.white)
+                        .fontWeight(.bold)
+                        .fontDesign(.rounded)
+                        .font(.title)
+                }
             }
         }
 
     }
+    
+    var addWaterButton: some View {
+        Group {
+            Button {
+                totalWater += selectedVolume
+                
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 100))
+                    .foregroundColor(.white)
+            }
+            .padding(15)
+            Text("Click to add the amount of water")
+                .foregroundStyle(.white)
+        }
+    }
 }
 #Preview {
     MainView()
-        .environmentObject(DataManager())
+        .environmentObject(WaterHistoryViewModel())
 }
 

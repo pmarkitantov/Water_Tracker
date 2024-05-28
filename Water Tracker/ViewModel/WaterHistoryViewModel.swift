@@ -9,7 +9,7 @@ import Foundation
 
 
 
-class DataManager: ObservableObject {
+class WaterHistoryViewModel: ObservableObject {
     
     @Published var waterIntakeHistory: [WaterIntakeData] = []
     
