@@ -9,21 +9,35 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000 
+    @EnvironmentObject var dataManager: DataManager
+    @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000
 
     var body: some View {
         ZStack {
             BackgroundView()
             
 
-            VStack(spacing: 20) {
+            VStack {
                 navigationBar
                 titleText
                 intakeSelectionBar
-                Spacer()
+                if !dataManager.waterIntakeHistory.isEmpty {
+                    HStack {
+                        Text("History")
+                            .font(.title)
+                            .padding(.horizontal)
+                        Spacer()
+                    }
+                    intakeHistory
+                       
+                        
+                }
             }
+            
             .foregroundColor(.white)
             .padding()
+            
+           
         }
 
     }
@@ -32,11 +46,27 @@ struct SettingsView: View {
 extension SettingsView {
     
     var intakeHistory: some View {
-        Group {
-            List {
+        List(dataManager.waterIntakeHistory) { intakeData in
+            HStack(alignment: .bottom) {
+                VStack(alignment: .leading) {
+                    Text("Date: \(intakeData.date)")
+                    Text("Amount of water: \(intakeData.amount)")
+                }
+                Spacer()
                 
             }
+            .frame(maxWidth: .infinity)
+            .listRowBackground(Color.clear)
+            .padding()
+            .overlay {
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.white, lineWidth: 2)
+            }
+                
+                
         }
+        .listStyle(.plain) // Устанавливаем стиль списка
+
     }
     
     var intakeSelectionBar: some View {
@@ -50,6 +80,7 @@ extension SettingsView {
                     .accentColor(.white)
             }
         }
+        .padding(.horizontal)
         
     }
     
@@ -67,17 +98,23 @@ extension SettingsView {
                     }
             }
         }
+        .padding(.horizontal)
     }
     
     var titleText: some View {
+        
         HStack {
             Text("Settings")
                 .font(.largeTitle)
             Spacer()
         }
+        .padding()
+           
+        
     }
 }
 
 #Preview {
     SettingsView()
+        .environmentObject(DataManager())
 }

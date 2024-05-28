@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var dataManager: DataManager
     @AppStorage("SelectedVolume") private var selectedVolume = 500
     @AppStorage("TotalWater") private var totalWater = 0
     @AppStorage("lastLaunchDate") private var lastDateString = ""
     @AppStorage("waterIntakeGoal") private var waterIntakeGoal: Double = 2000
     @AppStorage("waterIntakeHistory") private var waterIntakeHistory: Data = Data()
     @Environment(\.scenePhase) private var scenePhase
+//     var dataManager: DataManager = DataManager()
     
     
     @State private var showSettings: Bool = false
@@ -21,9 +23,9 @@ struct MainView: View {
         (Double(totalWater) / waterIntakeGoal) * 100
     }
     
-    init() {
-        resetTotalCountIfNewDay()
-    }
+//    init() {
+//        resetTotalCountIfNewDay()
+//    }
     
     var body: some View {
         ZStack {
@@ -70,15 +72,23 @@ struct MainView: View {
         
         .sheet(isPresented: $showSettings) {
             SettingsView()
+                .environmentObject(self.dataManager)
         }
     }
     
-    private func resetTotalCountIfNewDay() {
+     func resetTotalCountIfNewDay() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let currentDate = formatter.string(from: Date())
         
+        if lastDateString == "" {
+            lastDateString = currentDate
+            return
+        }
+        
         if currentDate != lastDateString {
+            dataManager.addWaterIntake(WaterIntakeData(date: lastDateString, amount: totalWater))
+            dataManager.saveWaterIntakeHistory()
             totalWater = 0
             
             lastDateString = currentDate
@@ -159,5 +169,6 @@ extension MainView {
 }
 #Preview {
     MainView()
+        .environmentObject(DataManager())
 }
 

@@ -10,11 +10,16 @@ import SwiftUI
 @main
 struct Water_TrackerApp: App {
     
+//    @StateObject var dataManager = DataManager()
+    
     var body: some Scene {
         WindowGroup {
             MainView()
-                .preferredColorScheme(.light)
-                .statusBarHidden(true)
+                .environmentObject(DataManager())
+                //                .preferredColorScheme(.light)
+//                .statusBarHidden(true)
         }
+        
+
     }
 }
