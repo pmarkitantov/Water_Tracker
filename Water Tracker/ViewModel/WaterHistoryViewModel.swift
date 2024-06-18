@@ -6,19 +6,55 @@
 //
 
 import Foundation
-
-
+import SwiftUI
 
 class WaterHistoryViewModel: ObservableObject {
-    
     @Published var waterIntakeHistory: [WaterIntakeData] = []
     
-    init() {
-            self.loadWaterIntakeHistory()
-        }
+    @AppStorage("SelectedVolume") var selectedVolume = 500
+    @AppStorage("TotalWater") var totalWater = 0
+    @AppStorage("lastLaunchDate")  var lastDateString = ""
+    @AppStorage("waterIntakeGoal") var waterIntakeGoal: Double = 2000
     
-    func addWaterIntake(_ data : WaterIntakeData) {
+    private let dateFormatter: DateFormatter
+    
+    init() {
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        loadWaterIntakeHistory()
+        resetTotalCountIfNewDay()
+    }
+    
+    func removeItem(at index: Int) {
+        waterIntakeHistory.remove(at: index)
+        saveWaterIntakeHistory()
+    }
+    
+    func resetTotalCountIfNewDay() {
+        let currentDate = getCurrentDateString()
+        
+        guard lastDateString != "" else {
+            lastDateString = currentDate
+            return
+        }
+        
+        if currentDate != lastDateString {
+            if totalWater != 0 {
+                addWaterIntake(WaterIntakeData(date: lastDateString, amount: totalWater))
+                totalWater = 0
+            }
+            lastDateString = currentDate
+            saveWaterIntakeHistory()
+        }
+    }
+    
+    func addWaterIntake(_ data: WaterIntakeData) {
         waterIntakeHistory.append(data)
+        saveWaterIntakeHistory()
+    }
+    
+    private func getCurrentDateString() -> String {
+        return dateFormatter.string(from: Date())
     }
     
     func loadWaterIntakeHistory() {
@@ -30,10 +66,9 @@ class WaterHistoryViewModel: ObservableObject {
                 print("Error decoding water intake history: \(error)")
             }
         }
-       
     }
     
-    func saveWaterIntakeHistory() {
+    private func saveWaterIntakeHistory() {
         do {
             let encodedData = try JSONEncoder().encode(waterIntakeHistory)
             UserDefaults.standard.set(encodedData, forKey: "waterIntakeHistoryData")
@@ -42,4 +77,3 @@ class WaterHistoryViewModel: ObservableObject {
         }
     }
 }
-
